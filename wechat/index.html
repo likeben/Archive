@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Wechat</title>
+    <!-- 引入样式文件 -->
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+<!-- 引入模板引擎 -->
+<script src="js/template-web.js"></script>
+<!-- 会话窗口模板 -->
+<script id="conversation-tpl" type="text/html">
+    <div class="header">
+        <span class="title">{{data.name}}</span>
+        <span class="icon"></span>
+    </div>
+    <div class="messages">
+        {{each data.messages msg i}}
+            {{if msg.type == 0}}
+                <div class="message receive">
+                    <div class="message-img">
+                        <img src={{data.img}} alt="">
+                    </div>
+                    <div class="message-text">
+                        <p>{{msg.text}}</p>
+                    </div>
+                </div>
+            {{/if}}
+            {{if msg.type == 1}}
+                <div class="message send">
+                    <div class="message-text">
+                        <p>{{msg.text}}</p>
+                    </div>
+                    <div class="message-img">
+                        <img src="./images/avatars/webwxgeticon.jpg" alt="">
+                    </div>
+                </div>
+            {{/if}}
+        {{/each}}
+    </div>
+    <div class="input-area">
+        <div class="toolbar">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <div class="input-box">
+            <textarea></textarea>
+            <button class="send">发送(S)</button>
+            <div class="tooltip">
+                不能发送空白消息
+            </div>
+        </div>
+    </div>
+</script>
+<!-- 聊天列表模板 -->
+<script id="friends-tpl" type="text/html">
+    <ul>
+        {{each data item index}}
+            <li class={{index == 0 ? 'selected' : ''}}>
+                <div class="pic">
+                    <img src={{item.img}} alt="">
+                </div>
+                <div class="des">
+                    <h5>{{item.name}}</h5>
+                    <p>{{item.messages[0].text}}</p>
+                </div>
+                <div class="date">
+                    <span>{{item.date}}</span>
+                </div>
+            </li>
+        {{/each}}
+    </ul>
+</script>
+<!-- 消息模板 -->
+<script id="message-tpl" type="text/html">
+    <div class="message send">
+        <div class="message-text">
+            <p>{{data}}</p>
+        </div>
+        <div class="message-img">
+            <img src="./images/avatars/webwxgeticon.jpg" alt="">
+        </div>
+    </div>
+</script>
+
+    <!-- 应用容器 -->
+    <div class="container">
+        <!-- 最左侧导航 -->
+        <div class="nav">
+            <div class="control">
+                <ul>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                </ul>
+            </div>
+            <div class="avatar">
+                <img src="./images/avatars/webwxgeticon.jpg" alt="">
+            </div>
+            <div class="nav-item">
+                <ul>
+                    <li class="selected"><a href="#chat"></a></li>
+                    <li><a href="#contact"></a></li>
+                    <li><a href="#moment"></a></li>
+                </ul>
+            </div>
+            <div class="setting">
+                <a href="#"></a>
+            </div>
+        </div>
+        <!-- 聊天列表导航 -->
+        <div class="friends">
+            <div class="header">
+                <input type="text" placeholder="搜索">
+                <button></button>
+            </div>
+            <div class="friends-list">
+            </div>
+        </div>
+        <!-- 会话区域 -->
+        <div class="conversation"></div>
+    </div>
+
+</body>
+<!-- 引入脚本文件 -->
+<script src="./js/jquery-3.1.1.js"></script>
+<script src="./js/script.js"></script>
+</html>

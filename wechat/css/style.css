@@ -1,0 +1,350 @@
+/* mixin 用于快速设置背景图片 */
+/* 去除默认样式, 实际开发中使用reset.css或normalize.css */
+* {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+/* 应用容器 */
+.container {
+  width: 674px;
+  height: 500px;
+  border: 1px solid #e5e5e5;
+  margin: 50px auto;
+  display: flex;
+}
+/* 最左侧导航 */
+.container .nav {
+  flex: 1;
+  background: #292B2E;
+  display: flex;
+  flex-flow: column;
+}
+.container .nav .control {
+  width: 100%;
+}
+.container .nav .control ul {
+  width: 80%;
+  margin: 10px auto;
+  display: flex;
+  justify-content: space-between;
+}
+.container .nav .control ul li {
+  height: 8px;
+  width: 8px;
+  background: #ddd;
+  border-radius: 50%;
+}
+.container .nav .avatar {
+  width: 36px;
+  height: 36px;
+  margin: 25px auto;
+}
+.container .nav .avatar img {
+  width: 100%;
+  height: 100%;
+}
+.container .nav .nav-item {
+  flex: 1;
+}
+.container .nav .nav-item ul {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+.container .nav .nav-item ul li {
+  width: 25px;
+  height: 25px;
+  margin: 25px auto;
+}
+.container .nav .nav-item ul li a {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.container .nav .nav-item ul li:nth-of-type(1) a {
+  background: url("../images/sprite.png") -5px -2055px no-repeat;
+}
+.container .nav .nav-item ul li:nth-of-type(1).selected a {
+  background: url("../images/sprite.png") -5px -2090px no-repeat;
+}
+.container .nav .nav-item ul li:nth-of-type(2) a {
+  background: url("../images/sprite.png") -5px -2146px no-repeat;
+}
+.container .nav .nav-item ul li:nth-of-type(2).selected a {
+  background: url("../images/sprite.png") -5px -2181px no-repeat;
+}
+.container .nav .nav-item ul li:nth-of-type(3) a {
+  background: url("../images/sprite.png") -5px -2239px no-repeat;
+}
+.container .nav .nav-item ul li:nth-of-type(3).selected a {
+  background: url("../images/sprite.png") -5px -2274px no-repeat;
+}
+.container .nav .setting {
+  width: 100%;
+  height: 40px;
+  text-align: center;
+}
+.container .nav .setting a {
+  display: inline-block;
+  width: 25px;
+  height: 25px;
+  background: url("../images/sprite.png") -5px -377px no-repeat;
+}
+/* 聊天列表 */
+.container .friends {
+  flex: 4;
+  background: #E8E7E6;
+  display: flex;
+  flex-flow: column;
+}
+.container .friends .header {
+  flex: 0 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 10px;
+}
+.container .friends .header input {
+  border: 1px solid #DAD7D6;
+  outline: 0;
+  width: 145px;
+  height: 22px;
+  font-size: 10px;
+  box-sizing: border-box;
+  padding-left: 3px;
+  background: url("../images/sprite.png") 115px -4px no-repeat;
+  background-color: #E5E3E2;
+}
+.container .friends .header input:focus {
+  background-color: #F2EFEE;
+}
+.container .friends .header button {
+  border: 1px solid #DAD7D6;
+  outline: 0;
+  box-sizing: border-box;
+  width: 22px;
+  height: 22px;
+  background: #F00;
+  background: url("../images/sprite.png") -1px -2027px no-repeat;
+}
+.container .friends .friends-list {
+  flex: 9;
+  overflow: auto;
+}
+.container .friends .friends-list::-webkit-scrollbar {
+  display: none;
+}
+.container .friends .friends-list ul {
+  width: 100%;
+}
+.container .friends .friends-list ul li {
+  width: 100%;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 0 10px;
+}
+.container .friends .friends-list ul li.selected {
+  background: #C3C3C5;
+}
+.container .friends .friends-list ul li:not(.selected):hover {
+  background: #DFDCDB;
+}
+.container .friends .friends-list ul li .pic {
+  width: 36px;
+  height: 36px;
+}
+.container .friends .friends-list ul li .pic img {
+  width: 100%;
+  height: 100%;
+}
+.container .friends .friends-list ul li .des {
+  flex: 1;
+  padding-left: 10px;
+}
+.container .friends .friends-list ul li .des h5 {
+  font-weight: normal;
+}
+.container .friends .friends-list ul li .des p {
+  font-size: 10px;
+  color: #999;
+  margin-top: 3px;
+  width: 85px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.container .friends .friends-list ul li .date {
+  width: 40px;
+  height: 40px;
+}
+.container .friends .friends-list ul li .date span {
+  font-size: 10px;
+  color: #999;
+}
+/* 会话区域 */
+.container .conversation {
+  flex: 9;
+  background: #F5F5F5;
+  display: flex;
+  flex-flow: column;
+}
+.container .conversation .header {
+  flex: 1;
+  border-bottom: 1px solid #E7E7E7;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 25px;
+}
+.container .conversation .header .title {
+  font-size: 18px;
+}
+.container .conversation .header .icon {
+  display: block;
+  width: 20px;
+  height: 20px;
+  background: url("../images/sprite.png") -5px -442px no-repeat;
+}
+.container .conversation .messages {
+  flex: 7;
+  overflow: auto;
+  padding-bottom: 15px;
+}
+.container .conversation .messages::-webkit-scrollbar {
+  display: none;
+}
+.container .conversation .messages .message {
+  width: 100%;
+  min-height: 40px;
+  box-sizing: border-box;
+  padding: 15px 20px 0 20px;
+  display: flex;
+}
+.container .conversation .messages .message .message-img {
+  width: 30px;
+  height: 30px;
+}
+.container .conversation .messages .message .message-img img {
+  width: 100%;
+  height: 100%;
+  border-radius: 3px;
+}
+.container .conversation .messages .message .message-text {
+  flex: 1;
+  padding: 5px 10px;
+  position: relative;
+  border-radius: 3px;
+}
+.container .conversation .messages .message.receive .message-text {
+  background: #fff;
+}
+.container .conversation .messages .message.receive .message-img {
+  margin-right: 10px;
+}
+.container .conversation .messages .message.receive .message-text::before {
+  content: '';
+  display: block;
+  border: 5px solid transparent;
+  border-right-color: #fff;
+  position: absolute;
+  top: 10px;
+  left: -10px;
+}
+.container .conversation .messages .message.send .message-text {
+  background: #9EEA6A;
+}
+.container .conversation .messages .message.send .message-img {
+  margin-left: 10px;
+}
+.container .conversation .messages .message.send .message-text::after {
+  content: '';
+  display: block;
+  border: 5px solid transparent;
+  border-left-color: #9EEA6A;
+  position: absolute;
+  top: 10px;
+  right: -10px;
+}
+.container .conversation .input-area {
+  flex: 2;
+  border-top: 1px solid #E7E7E7;
+  background: #fff;
+  display: flex;
+  flex-flow: column;
+}
+.container .conversation .input-area .toolbar {
+  height: 38px;
+  width: 100%;
+}
+.container .conversation .input-area .toolbar span {
+  display: inline-block;
+  width: 22px;
+  height: 22px;
+  margin-left: 15px;
+  margin-top: 8px;
+}
+.container .conversation .input-area .toolbar span:nth-of-type(1) {
+  background: url("../images/sprite.png") -4px -809px no-repeat;
+}
+.container .conversation .input-area .toolbar span:nth-of-type(2) {
+  background: url("../images/sprite.png") -4px -1643px no-repeat;
+}
+.container .conversation .input-area .toolbar span:nth-of-type(3) {
+  background: url("../images/sprite.png") -4px -1920px no-repeat;
+}
+.container .conversation .input-area .input-box {
+  flex: 1;
+  position: relative;
+}
+.container .conversation .input-area .input-box textarea {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  outline: 0;
+  resize: none;
+  box-sizing: border-box;
+  padding-left: 15px;
+}
+.container .conversation .input-area .input-box button {
+  position: absolute;
+  right: 20px;
+  bottom: 10px;
+  border: 1px solid #E1E1E1;
+  outline: 0;
+  background: #F5F5F5;
+  width: 66px;
+  height: 25px;
+  color: #606060;
+}
+.container .conversation .input-area .input-box button:hover {
+  background: #3DCE3D;
+  color: #fff;
+}
+.container .conversation .input-area .input-box .tooltip {
+  position: absolute;
+  bottom: 42px;
+  right: 10px;
+  font-size: 10px;
+  border: 1px solid #B6B6B6;
+  border-radius: 3px;
+  background: #F5F5F5;
+  padding: 5px;
+  display: none;
+}
+.container .conversation .input-area .input-box .tooltip::after {
+  content: '';
+  display: block;
+  width: 6px;
+  height: 6px;
+  background: #F5F5F5;
+  border: 1px solid #B6B6B6;
+  border-left-color: transparent;
+  border-top-color: transparent;
+  position: absolute;
+  transform: rotateZ(45deg);
+  right: 20px;
+  bottom: -4px;
+}
