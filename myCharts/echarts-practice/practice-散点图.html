@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>echarts-散点图</title>
+</head>
+<body>
+<div id="main" style="width: 90%;height: 500px;margin: 50px auto;"></div>
+<script src="echart2/echarts-all.js"></script>
+<script>
+    var myChart = echarts.init(document.getElementById('main'));
+    var evnColor = [
+        'rgba(255,0,0,0.5)', 'rgba(255,51,0,0.5)', 'rgba(255,102,0,0.5)', 'rgba(255,153,0,0.5)', 'rgba(255,204,0,0.5)',
+        'rgba(255,255,0,0.5)', 'rgba(204,229,0,0.5)', 'rgba(153,204,0,0.5)', 'rgba(102,178,0,0.5)', 'rgba(51,153,0,0.5)'
+    ];
+
+    var option = {
+        grid : {
+            y : 70,
+            y2 : 30
+        },
+        title : {
+            text : '地区发展水平',
+            subtext : '纯属虚构'
+        },
+        toolbox : {
+            show : true,
+            feature : {
+                mark : {
+                  show : true
+                },
+                saveAsImage : {
+                    show : true,
+                    type : 'png'
+                },
+                dataZoom : {
+                    show : true
+                },
+                dataView : {
+                    show : true
+                },
+                restore : {
+                    show : true
+                }
+            }
+        },
+        tooltip : {
+            trigger : 'axis',
+            formatter : function(params) {
+                // console.log(params.value);
+                return params.seriesName + ' ' + params.name + '<br >'
+                    + '人均收入: ' + Math.round(params.value[0]) + ' 元/人<br >'
+                    + '平均寿命: ' + Math.round(params.value[1]) + ' 岁<br >'
+                    + '常住人口: ' + Math.round(params.value[2]) + ' 百万<br >'
+                    + '环境质量: ' + params.value[3].toFixed(1);
+            },
+            axisPointer : {
+                show : true,
+                type : 'cross'
+            }
+        },
+        legend : {
+            data: ['A国', 'B国', 'C国', 'D国']
+        },
+        xAxis : [
+            {
+                type : 'value',
+                name: '人均收入',
+                /*min : 1000,
+                max : 4000,
+                splitNumber : 6*/
+                scale : true
+            }
+        ],
+        yAxis : [
+            {
+                type : 'value',
+                name : '平均寿命',
+                min : 60,
+                /*max : 75,
+                splitNumber : 6,
+                axisLabel : {
+                    formatter : function(value) {
+                        return value.toFixed(1)
+                    }
+                }*/
+                scale : true
+            }
+        ],
+        series : [
+            {
+                name : 'A国',
+                type : 'scatter',
+                symbol : 'circle',
+                symbolSize : function(value) {
+                    return value[2] * 0.08 + 1
+                },
+                itemStyle : {
+                    normal : {
+                        color : function(params) {
+                            //console.log(params);
+                            if (params.data) {  // 打印出来的第一个不满足条件, 所以需要进行判断
+                                var value = params.data.value[3];
+                                return evnColor[Math.round(value / evnColor.length)]
+                            }
+                        },
+                        borderWidth : 4,
+                        borderColor : '#77E3FF'
+                    }
+                },
+                data: [
+                    {
+                        name: '地区1',
+                        // 数据维度：经济收入，寿命，人口，环境质量
+                        // 视觉编码：x，y，size，color
+                        value: [1200, 70, 400, 30]
+                    },
+                    {name:'地区2', value:[Math.random()*2600+1200, Math.random()*15+60, Math.random()*500, Math.random()*100]},
+                    {name:'地区3', value:[Math.random()*2600+1200, Math.random()*15+60, Math.random()*500, Math.random()*100]},
+                    {name:'地区4', value:[Math.random()*2600+1200, Math.random()*15+60, Math.random()*500, Math.random()*100]},
+                    {name:'地区5', value:[Math.random()*2600+1200, Math.random()*15+60, Math.random()*500, Math.random()*100]},
+                    {name:'地区6', value:[Math.random()*2600+1200, Math.random()*15+60, Math.random()*500, Math.random()*100]},
+                    {name:'地区7', value:[Math.random()*2600+1200, Math.random()*15+60, Math.random()*500, Math.random()*100]},
+                    {name:'地区8', value:[Math.random()*2600+1200, Math.random()*15+60, Math.random()*500, Math.random()*100]},
+                    {name:'地区9', value:[Math.random()*2600+1200, Math.random()*15+60, Math.random()*500, Math.random()*100]},
+                    {name:'地区10', value:[Math.random()*2600+1200, Math.random()*15+60, Math.random()*500, Math.random()*100]}
+                ]
+            },
+            {
+                name : 'B国',
+                type : 'scatter',
+                symbol : 'circle',
+                symbolSize : function(value) {
+                    return value[2] * 0.08 + 1
+                },
+                itemStyle : {
+                    normal : {
+                        color : function(params) {
+                            if (params.data) {
+                                var value = params.data.value[3];
+                                return evnColor[Math.round(value / evnColor.length)]
+                            }
+                        },
+                        borderWidth : 4,
+                        borderColor : '#BA77FF'
+                    }
+                },
+                data: [
+                    {
+                        name: '地区1',
+                        value: [1200, 70, 400, 30]
+                    },
+                    {name:'地区2', value:[Math.random()*2600+1200, Math.random()*15+60, Math.random()*500, Math.random()*100]},
+                    {name:'地区3', value:[Math.random()*2600+1200, Math.random()*15+60, Math.random()*500, Math.random()*100]},
+                    {name:'地区4', value:[Math.random()*2600+1200, Math.random()*15+60, Math.random()*500, Math.random()*100]},
+                    {name:'地区5', value:[Math.random()*2600+1200, Math.random()*15+60, Math.random()*500, Math.random()*100]},
+                    {name:'地区6', value:[Math.random()*2600+1200, Math.random()*15+60, Math.random()*500, Math.random()*100]},
+                    {name:'地区7', value:[Math.random()*2600+1200, Math.random()*15+60, Math.random()*500, Math.random()*100]},
+                    {name:'地区8', value:[Math.random()*2600+1200, Math.random()*15+60, Math.random()*500, Math.random()*100]},
+                    {name:'地区9', value:[Math.random()*2600+1200, Math.random()*15+60, Math.random()*500, Math.random()*100]},
+                    {name:'地区10', value:[Math.random()*2600+1200, Math.random()*15+60, Math.random()*500, Math.random()*100]}
+                ]
+            },
+            {
+                name : 'C国',
+                type : 'scatter',
+                symbol : 'circle',
+                symbolSize : function(value) {
+                    return value[2] * 0.08 + 1
+                },
+                itemStyle : {
+                    normal : {
+                        color : function(params) {
+                            if (params.data) {
+                                var value = params.data.value[3];
+                                return evnColor[Math.round(value / evnColor.length)]
+                            }
+                        },
+                        borderWidth : 4,
+                        borderColor : '#007FFF'
+                    }
+                },
+                data: [
+                    {
+                        name: '地区1',
+                        value: [1200, 70, 400, 30]
+                    },
+                    {name:'地区2', value:[Math.random()*2600+1200, Math.random()*15+60, Math.random()*500, Math.random()*100]},
+                    {name:'地区3', value:[Math.random()*2600+1200, Math.random()*15+60, Math.random()*500, Math.random()*100]},
+                    {name:'地区4', value:[Math.random()*2600+1200, Math.random()*15+60, Math.random()*500, Math.random()*100]},
+                    {name:'地区5', value:[Math.random()*2600+1200, Math.random()*15+60, Math.random()*500, Math.random()*100]},
+                    {name:'地区6', value:[Math.random()*2600+1200, Math.random()*15+60, Math.random()*500, Math.random()*100]},
+                    {name:'地区7', value:[Math.random()*2600+1200, Math.random()*15+60, Math.random()*500, Math.random()*100]},
+                    {name:'地区8', value:[Math.random()*2600+1200, Math.random()*15+60, Math.random()*500, Math.random()*100]},
+                    {name:'地区9', value:[Math.random()*2600+1200, Math.random()*15+60, Math.random()*500, Math.random()*100]},
+                    {name:'地区10', value:[Math.random()*2600+1200, Math.random()*15+60, Math.random()*500, Math.random()*100]}
+                ]
+            },
+            {
+                name : 'D国',
+                type : 'scatter',
+                symbol : 'circle',
+                symbolSize : function(value) {
+                    return value[2] * 0.08 + 1
+                },
+                itemStyle : {
+                    normal : {
+                        color : function(params) {
+                            if (params.data) {
+                                var value = params.data.value[3];
+                                return evnColor[Math.round(value / evnColor.length)]
+                            }
+                        },
+                        borderWidth : 4,
+                        borderColor : '#AA0022'
+                    }
+                },
+                data: [
+                    {
+                        name: '地区1',
+                        value: [1200, 70, 400, 30]
+                    },
+                    {name:'地区2', value:[Math.random()*2600+1200, Math.random()*15+60, Math.random()*500, Math.random()*100]},
+                    {name:'地区3', value:[Math.random()*2600+1200, Math.random()*15+60, Math.random()*500, Math.random()*100]},
+                    {name:'地区4', value:[Math.random()*2600+1200, Math.random()*15+60, Math.random()*500, Math.random()*100]},
+                    {name:'地区5', value:[Math.random()*2600+1200, Math.random()*15+60, Math.random()*500, Math.random()*100]},
+                    {name:'地区6', value:[Math.random()*2600+1200, Math.random()*15+60, Math.random()*500, Math.random()*100]},
+                    {name:'地区7', value:[Math.random()*2600+1200, Math.random()*15+60, Math.random()*500, Math.random()*100]},
+                    {name:'地区8', value:[Math.random()*2600+1200, Math.random()*15+60, Math.random()*500, Math.random()*100]},
+                    {name:'地区9', value:[Math.random()*2600+1200, Math.random()*15+60, Math.random()*500, Math.random()*100]},
+                    {name:'地区10', value:[Math.random()*2600+1200, Math.random()*15+60, Math.random()*500, Math.random()*100]}
+                ]
+            }
+        ]
+    };
+
+    myChart.setOption(option);
+</script>
+</body>
+</html>

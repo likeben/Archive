@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>echarts-饼图</title>
+</head>
+<body>
+<div id="main" style="width: 600px;height: 600px;margin: 20px auto;border: 1px solid #ccc;"></div>
+<script src="echart2/echarts-all.js"></script>
+<script>
+    var myChart = echarts.init(document.getElementById('main'));
+    var option = {
+        title : {
+            x : 'center',
+            y : 'center',
+            text : '产品销量',
+            subtext : '纯属虚构'
+        },
+        legend : {
+            orient : 'vertical',
+            x : 30,
+            y : 'center',
+            itemGap : 20,
+            data : ['产品A', '产品B', '产品C', '产品D'],
+            selectedMode : false
+        },
+        tooltip : {
+            trigger : 'item'
+        },
+        toolbox : {
+            show : true,
+            orient : 'vertical',
+            y : 'center',
+            feature : {
+                mark : {show : true},
+                dataView : {show : true},
+                restore : {show : true},
+                saveAsImage : {show : true}
+            }
+        },
+        series : [
+            {
+                type : 'pie',
+                radius : ['14%', '40%'],
+                roseType : 'area',
+                // calculable : true,
+                itemStyle : {
+                    normal : {
+                        label : {
+                            position : 'inner',
+                            distance : 0.4
+                        },
+                        labelLine : {
+                            length : 25
+                        }
+                    },
+                    emphasis : {
+                        label : {
+                            show : true,
+                            distance : 0.45
+                        }
+                    }
+                },
+                data:[
+                    {name:'产品A', value: 100},
+                    {name:'产品B', value: 80},
+                    {name:'产品C', value: 60},
+                    {name:'产品D', value: 40}
+                ]
+            },
+            {
+                name : '产品A',
+                type : 'pie',
+                center : [450, 130],
+                radius : [20, 50],
+                itemStyle : {
+                    normal : {
+                        color : function(param) {
+                            return 'rgba(255,127,80,'+ (1 - param.dataIndex * 0.2) +')';
+                        },
+                        label : {
+                            textStyle : {
+                                color : 'rgba(255,127,80,1)'
+                            }
+                        },
+                        labelLine : {
+                            length : 0,
+                            lineStyle : {
+                                color : 'rgba(255,127,80,1)'
+                            }
+                        }
+                    }
+                },
+                data:[
+                    {name:'产品A-1', value: 60},
+                    {name:'产品A-2', value: 30},
+                    {name:'产品A-3', value: 10}
+                ]
+            },
+            {
+                name : '产品B',
+                type : 'pie',
+                center : ['75%', '80%'],
+                radius : [20, 50],
+                itemStyle : {
+                    normal : {
+                        color : function(param) {
+                            return 'rgba(135,206,250,'+ (1 - param.dataIndex * 0.2) +')';
+                        },
+                        label : {
+                            textStyle : {
+                                color : 'rgba(135,206,250,1)'
+                            }
+                        },
+                        labelLine : {
+                            length : 0,
+                            lineStyle : {
+                                color : 'rgba(135,206,250,1)'
+                            }
+                        }
+                    }
+                },
+                data:[
+                    {name:'产品B-1', value: 30},
+                    {name:'产品B-2', value: 20},
+                    {name:'产品B-3', value: 20},
+                    {name:'产品B-4', value: 10}
+                ]
+            },
+            {
+                name : '产品C',
+                type : 'pie',
+                center : ['25%', '80%'],
+                radius : [20, 50],
+                itemStyle : {
+                    normal : {
+                        color : function(param) {
+                            return 'rgba(218,112,214,'+ (1 - param.dataIndex * 0.2) +')';
+                        },
+                        label : {
+                            textStyle : {
+                                color : 'rgba(218,112,214,1)'
+                            }
+                        },
+                        labelLine : {
+                            length : 0,
+                            lineStyle : {
+                                color : 'rgba(218,112,214,1)'
+                            }
+                        }
+                    }
+                },
+                data:[
+                    {name:'产品C-1', value: 25},
+                    {name:'产品C-2', value: 20},
+                    {name:'产品C-3', value: 10}
+                ]
+            },
+            {
+                name : '产品D',
+                type : 'pie',
+                center : [150, 130],
+                radius : [20, 50],
+                itemStyle : {
+                    normal : {
+                        color : function(param) {
+                            return 'rgba(50,205,50,'+ (1 - param.dataIndex * 0.2) +')';
+                        },
+                        label : {
+                            textStyle : {
+                                color : 'rgba(50,205,50,1)'
+                            }
+                        },
+                        labelLine : {
+                            length : 0,
+                            lineStyle : {
+                                color : 'rgba(50,205,50,1)'
+                            }
+                        }
+                    }
+                },
+                data:[
+                    {name:'产品D-1', value: 20},
+                    {name:'产品D-2', value: 10},
+                    {name:'产品D-3', value: 5},
+                    {name:'产品D-4', value: 5}
+                ]
+            }
+
+        ]
+
+    };
+
+    myChart.setOption(option);
+</script>
+</body>
+</html>

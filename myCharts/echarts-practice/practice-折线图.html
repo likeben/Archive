@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>echarts-折线图</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            border: 0;
+            outline: 0;
+            list-style: none;
+        }
+        .main {
+            width: 900px;
+            height: 400px;
+            margin: 120px auto;
+        }
+    </style>
+</head>
+<body>
+<div class="main"></div>
+<script src="echart2/echarts-all.js"></script>
+<script>
+    var myChart = echarts.init(document.querySelector('.main'));
+    var option = {
+        title : {
+            text : '网站流量分析'
+        },
+        legend : {
+            data : ['line1', 'line2'],
+            itemGap : 30,
+            itemWidth : 30,
+            itemHeight : 15,
+            selectedMode : 'single'
+        },
+        xAxis : {
+            type : 'category',
+            position : 'bottom',
+            boundaryGap : false,
+            axisLine : {
+                lineStyle : {
+                    color : '#008ACD',
+                    width : 2
+                }
+            },
+            axisLabel : {
+                textStyle : {
+                    color : '#5C5C5C'
+                }
+            },
+            axisTick : {
+                onGap : false,
+                lineStyle : {
+                    color : '#5C5C5C'
+                }
+            },
+            data : ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
+        },
+        yAxis : {
+            axisLine : {
+                lineStyle : {
+                    color : '#008ACD',
+                    width : 2
+                }
+            },
+            axisLabel : {
+                textStyle : {
+                    color : '#6C6C6C'
+                }
+            },
+            axisTick : {
+                show : false
+            }
+        },
+        series : [
+            {
+                name : 'line1',
+                type : 'line',
+                smooth : true,
+                symbolSize : 4,
+                itemStyle : {
+                    normal : {
+                        color : '#F40',
+                        borderColor : '#5AB1EF'
+                    },
+                    emphasis : {
+                        borderSize : 10
+                    }
+                },
+                data : [620, 732, 791, {
+                    value : 734,
+                    symbol : 'emptyHeart',
+                    symbolSize : 8/*,
+                    itemStyle : {
+                         normal: {
+                            borderColor: '#5AB1EF'
+                         }
+                    }*/
+                }, 890, 930, 820]
+            },
+            {
+                name : 'line2',
+                type : 'line',
+                symbol : 'star6',   // star后添加数字, 表示角的个数
+                symbolSize : 12,
+                itemStyle : {
+                    normal : {
+                        color : '#0fe'
+                    }
+                },
+                /*legendHoverLink : false,*/
+                symbolRotate : -20,
+                data : [320, 332, '-', 334, 390, 330, 320]
+            }
+        ]
+    };
+    /*
+     symbolSize: 可以是单个值，如果在 symbol 为图片的时候想要分别设置宽高防止图片被拉伸，可以使用数组，其中数组第一个值是高，第二个值是宽。 实现气泡图时symbolSize需为Function，气泡大小取决于该方法返回值，传入参数为当前数据项（value数组）。
+     */
+
+    myChart.setOption(option);
+</script>
+</body>
+</html>

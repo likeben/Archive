@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>echart-区域缩放</title>
+</head>
+<body>
+<div id="main" style="width: 80%;height: 550px;margin:50px auto;/*border: 1px solid #ddd;*/"></div>
+<script src="echart2/echarts-all.js"></script>
+<script>
+    window.onload = function() {
+        var myChart = echarts.init(document.getElementById('main'));
+        var option = {
+            grid : {
+                y : 80,
+                backgroundColor : '#F8F8F8'
+            },
+            tooltip : {
+                trigger : 'axis',
+                showContent : true,
+                position : function(p) {
+                    // 位置回调, 参数p为鼠标在画布中的坐标, 不是相对于图表的坐标系
+                    // console.log(p);
+                    return [p[0] + 30, p[1] - 30];
+                },
+                formatter : function(params){
+                    //console.log(params);
+                    return 'name: ' + params[0][0] + '<br >' + 'value: ' + params[0][1];
+                },
+                showDelay : 0,
+                hideDelay : 0,
+                transitionDuration : 0,
+                enterable : true,
+                backgroundColor : 'rgba(102,0,51,.6)',
+                borderRadius : 0,
+                borderWidth : 3,
+                borderColor : 'rgba(51,204,102,.8)',
+                padding : 2,
+                textStyle : {
+                    color : '#99FF00'
+                },
+                axisPointer : {
+                    type : 'cross',
+                    lineStyle: {
+                        color: '#48b',
+                        width: 2,
+                        type: 'solid'
+                    },
+                    crossStyle: {
+                        color: '#1e90ff',
+                        width: 1,
+                        type: 'dashed'
+                    },
+                    shadowStyle: {
+                        color: 'rgba(150,150,150,0.3)',
+                        width: 'auto',
+                        type: 'default'
+                    }
+                }
+            },
+            toolbox: {
+                show : true,
+                orient: 'horizontal',
+                x: 760,
+                y: 'top',
+                color : ['#1e90ff','#22bb22','#4b0082','#d2691e'],
+                backgroundColor: 'rgba(0,0,0,0)',
+                borderColor: '#ccc',
+                borderWidth: 0,
+                padding: 5,
+                showTitle: true,
+                feature : {
+                    mark : {
+                        show : true,
+                        title : {
+                            mark : '辅助线-开关',
+                            markUndo : '辅助线-删除',
+                            markClear : '辅助线-清空'
+                        },
+                        lineStyle : {
+                            width : 1,
+                            color : '#1e90ff',
+                            type : 'dashed'
+                        }
+                    },
+                    dataView : {
+                        show : true,
+                        title : '数据视图',
+                        readOnly: true
+                    },
+                    magicType: {
+                        show : true,
+                        title : {
+                            line : '动态类型切换-折线图',
+                            bar : '动态类型切换-柱形图'
+                        },
+                        type : ['line', 'stack', 'tiled']
+                    },
+                    restore : {
+                        show : true,
+                        title : '还原',
+                        color : 'black'
+                    },
+                    saveAsImage : {
+                        show : true,
+                        title : '保存为图片',
+                        type : 'jpeg',
+                        lang : ['点击本地保存']
+                    }
+                }
+            },
+            dataZoom : {
+                show : true,
+                orient : 'horizontal',
+                start : 40,
+                end : 60,
+                handleColor : '#555555',
+                handleSize : 10,
+                backgroundColor : '#33FF66',
+                dataBackgroundColor : '#99CC00',
+                fillerColor : 'rgba(153,102,153,.6)',
+                showDetail : true,
+                realtime : false,
+                zoomLock : true,
+                xAxisIndex : 0  // 设置dataZoom接管那个系列的数据
+            },
+            xAxis : [
+                {
+                    type : 'category',
+                    boundaryGap : false,
+                    data : (function() {
+                        var res = [];
+                        for (var i = 0; i < 150; i ++) {
+                            res.push('' + (i + 1));
+                        }
+                        return res;
+                    }())
+                },
+                {
+                    type : 'category',
+                    boundaryGap : false,
+                    splitLine : {
+                        show : false
+                    },
+                    data : (function() {
+                        var res = [];
+                        for (var i = 0; i < 150; i ++) {
+                            res.push('' + (i + 1));
+                        }
+                        return res;
+                    }())
+                }
+            ],
+            yAxis : {
+                type : 'value',
+                splitLine : {
+                    show : false
+                },
+                splitArea : {
+                    show : true
+                }
+            },
+            series : [
+                {
+                    name : 'fixed',
+                    type : 'line',
+                    // stack : 'group',
+                    symbol : 'emptyRect',
+                    xAxisIndex : 0,
+                    data : (function() {
+                        var res = [];
+                        var val = 0;
+                        for (var i = 0; i < 150; i ++) {
+                            val = ((Math.random() * 34) + 20).toFixed(2) * 1;
+                            res.push(val);
+                        }
+                        return res;
+                    }())
+                },
+                {
+                    name : 'bigData',
+                    type : 'line',
+                    // stack : 'group',
+                    symbol : 'emptyCircle',
+                    symbolSize : 3,
+                    itemStyle : {
+                        normal : {
+                            color : '#2EC7C9'
+                        }
+                    },
+                    xAxisIndex : 1,
+                    data : (function() {
+                        var res = [];
+                        var val = 0;
+                        for (var i = 0; i < 150; i ++) {
+                            val = ((Math.random() * 10) + 5).toFixed(2) * 1;
+                            res.push(val);
+                        }
+                        return res;
+                    })()
+                }
+            ]/*,
+            show : function() {
+                console.log(this.xAxis);
+                console.log(this.series);
+            }*/
+        };
+
+        myChart.setOption(option);
+        // option.show();
+    }
+</script>
+</body>
+</html>

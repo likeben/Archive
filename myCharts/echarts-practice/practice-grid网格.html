@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ECHARTS-grid网格线</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            border: 0;
+            outline: 0;
+            list-style: none;
+        }
+        html, body {
+            width: 100%;
+            height: 100%;
+        }
+        .box {
+            width: 60%;
+            height: 600px;
+            margin: 50px auto;
+        }
+    </style>
+</head>
+<body>
+<div id="main" class="box"></div>
+
+
+
+
+<script src="echart2/echarts-all.js"></script>
+<script>
+    var myChart = echarts.init(document.getElementById('main'));
+    var option = {
+        grid : {
+            x : 70,
+            y : 100,
+            width : '85%',
+            height : '400'/*,
+            backgroundColor : '#f5f5f5',
+            borderColor : '#f00',
+            borderWidth : 5*/
+        },
+        title : {
+            text: '未来一周气温变化',
+            textStyle : {
+                fontFamily : '幼圆',
+                fontSize : 20
+            },
+            subtext: 'from Baidu',
+            sublink :'http://www.baidu.com',
+            subtextStyle : {
+                color : 'purple',
+                // fontWeight : 'bold',
+                fontStyle : 'italic',
+                fontFamily : 'Impact',
+                fontSize : 16
+            },
+            itemGap : 10,
+            x : 'center'
+        },
+        tooltip : {
+            // trigger: 'item',
+            // showContent : false,
+            // showDelay : 1000
+            // hideDelay : 1000
+            // transitionDuration : 500
+            // enterable : false
+            trigger : 'axis',
+            backgroundColor : 'rgba(0, 0, 255, .4)',
+            borderWidth : 2,
+            borderColor : 'deeppink',
+            borderRadius : 0,
+            padding : 10,
+            axisPointer : {
+                type : 'line',
+                lineStyle : {
+                    color : 'green',
+                    type : 'dashed',
+                    width : 3
+                }
+            }
+        },
+        legend: {
+            x : 'center',
+            y : 70,
+            orient : 'horizontal',
+            padding : 10,
+            borderWidth : 2,
+            borderColor : 'gold',
+            itemGap : 30,
+            // itemWidth : 40,
+            itemHeight : 15,
+            /*textStyle : {
+                align : 'right'
+            },*/
+            selectedMode : 'single',
+            data:[{name : 'i', icon : 'image://echart2/favicon.png', textStyle : {color : 'red', fontWeight : 'bold'}},'最高气温','最低气温']
+        },
+        toolbox: {
+            show : true,
+            feature : {
+                mark : true,
+                dataView : {readOnly: false},
+                magicType:['line', 'bar'],
+                restore : true,
+                saveAsImage : true
+            }
+        },
+        /*calculable : true,*/
+        xAxis : [
+            {
+                // show : true,
+                type : 'category',
+                // position : 'top',
+                /*name : '日期',
+                nameLocation : 'end',
+                nameTextStyle : {
+                    fontSize : 22,
+                    fontWeight : 'bold',
+                    color : '#f40',
+                    fontFamily : '华文细黑'
+                },*/
+                axisTick : {
+                    length : 10,
+                    inside : true,
+                    onGap : null,
+                    lineStyle : {
+                        width : 3,
+                        color : 'orangered'
+                    }
+                },
+                axisLabel : {
+                    rotate : 20,
+                    margin : 10,
+                    clickable : true
+                },
+                /*splitArea : {
+                    show : true,
+                    color : ['rgba(250,250,0,0.3)', 'rgba(0,200,200,0.3)']
+                },*/
+                boundaryGap : true,
+                data : ['周一','周二', {value : '周三', textStyle : {color : 'purple', fontSize : 25, fontFamily : '楷体', fontWeight : 'bold'}},'周四','周五','周六','周日']
+            }
+        ],
+        yAxis : [
+            {
+                show : true,
+                name : '摄氏度',
+                nameTextStyle : {
+                    fontSize : 18,
+                    fontWeight : 'bold',
+                    color : 'red',
+                    fontFamily : '仿宋'
+                },
+                type : 'value',
+                max : 20,
+                // onZero : false,
+                axisLabel : {
+                    formatter: '{value} °C'
+                },
+                splitArea : {show : true, areaStyle : {color : ['rgba(120, 50, 50, .2)', 'rgba(50, 100, 222, .3)']}}
+            }
+        ],
+        series : [
+            {
+                name:'最高气温',
+                type:'bar',
+                //barWidth : 35,
+                //barGap : '50%',
+                barCategoryGap : 45,
+                //barMaxWidth : 20,
+                /*symbol : 'heart',
+                symbolSize : 18,*/
+                itemStyle: {
+                    normal: {
+                        color : '#aa0',
+                        barBorderWidth : 2,
+                        barBorderColor : '#035',
+                        barBorderRadius : 5
+                        /*lineStyle: {
+                            shadowColor : 'rgba(0,0,0,0.4)'
+                        }*/
+                    }
+                },
+                data:[11, 11, 15, 13, 12, 13, 10],
+                markPoint : {
+                    symbol : 'star',
+                    symbolRotate : 20,
+                    symbolSize : 20,
+                    itemStyle : {
+                        normal : {
+                            color : '#f06'
+                        },
+                        emphasis : {
+
+                        }
+                    },
+                    data : [
+                        {name : '周最高', value : 15, xAxis: '周三', yAxis: 15.5}
+                    ]/*,
+                    effect : {
+                        show: true,
+                        type: 'bounce',
+                        loop: true,
+                        period: 15,
+                        scaleSize : 1.2,
+                        bounceDistance: 20,
+                        color : null,
+                        shadowColor : null,
+                        shadowBlur : 0
+                    }*/
+
+                }
+            },
+            {
+                name:'最低气温',
+                type:'line',
+                itemStyle: {
+                    normal: {
+                        color : 'blue',
+                        lineStyle: {
+                            shadowColor : 'rgba(0,0,0,0.4)'
+                        }
+                    }
+                },
+                data:[1, -2, 2, 5, 3, 2, 0],
+                markPoint : {
+                    data : [
+                        {name : '周最低', value : -2, xAxis: 1, yAxis: -1.5}
+                    ]
+                }
+            }
+        ]
+    };
+
+    myChart.setOption(option);
+    window.onresize = myChart.resize;
+</script>
+</body>
+</html>

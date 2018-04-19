@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>canvas-绘制网格和折线图</title>
+    <style>
+        div {
+            width: 820px;
+            margin: 50px auto;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <canvas id="theCanvas" width="800" height="500" style="border: 1px solid #000;"></canvas>
+    </div>
+
+    <script>
+        var theCanvas = document.getElementById('theCanvas');
+        var ctx = theCanvas.getContext('2d');
+
+        // 数据
+        var data = [20, 60, 30, 15, 50, 40, 70];
+
+        // 绘制网格
+        var gap = 10;   // 定义网格间距
+        var row = theCanvas.height / gap;   // 计算多少行
+        var col = theCanvas.width / gap;    // 计算多少列
+
+        // 网格线样式
+        ctx.lineWidth = 0.5;
+        ctx.strokeStyle = 'red';
+
+            // 绘制行
+        for (var i = 1; i < row; i++) {
+            ctx.moveTo(0, gap *i);
+            ctx.lineTo(theCanvas.width, gap *i)
+        }
+
+            // 绘制列
+        for (var i = 1; i < col; i++) {
+            ctx.moveTo(gap * i, 0);
+            ctx.lineTo(gap * i,theCanvas.height)
+        }
+
+        ctx.stroke();
+
+        // 绘制坐标系
+        ctx.beginPath();
+        ctx.lineWidth = 2;
+        ctx.strokeStyle = 'blue';
+            // x轴
+        ctx.moveTo(100, 400);
+        ctx.lineTo(700, 400);
+        ctx.lineTo(690, 410);
+        ctx.moveTo(700, 400);
+        ctx.lineTo(690, 390);
+            // y轴
+        ctx.moveTo(100, 400);
+        ctx.lineTo(100, 50);
+        ctx.lineTo(90, 60);
+        ctx.moveTo(100, 50);
+        ctx.lineTo(110, 60);
+
+        ctx.stroke();
+
+        // 绘制折线
+        ctx.beginPath();
+        var yRatio = (350 - 20) / 100;  // 将y轴分为100份，将来根据数据大小按比例来设置折点纵坐标
+        var xGap = (600 - 20)/ data.length; // 有多少数据，就将x轴等分为多少份，用于表示数据索引
+        ctx.strokeStyle = 'deeppink';
+        ctx.moveTo(100, 400);   // 设置折线起点
+        for (var i = 0; i < data.length; i++) { // 遍历数据，绘制折线
+           ctx.lineTo(100 + xGap * (i + 1), 400 - data[i] * yRatio);
+        }
+        ctx.stroke();
+    </script>
+</body>
+</html>

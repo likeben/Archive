@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>echarts-柱状图</title>
+</head>
+<body>
+    <div id="main" style="width: 80%; height: 450px; margin: 50px auto;"></div>
+
+    <script src="echart2/echarts-all.js"></script>
+    <script>
+        var myChart = echarts.init(document.getElementById('main'));
+        var option = {
+            title : {
+                text : '某产品销售',
+                subtext : '纯属虚构'
+            },
+            grid : {
+               borderWidth : 0
+            },
+            legend : {
+                data : [ '预期销售', '实际销售']
+            },
+            xAxis : {
+                axisLine : {
+                    lineStyle : {
+                        color : 'rgba(0, 102, 153, .4)',
+                        width : 25
+                    }
+                },
+                axisTick : {
+                    length : 24,
+                    lineStyle : {
+                        color : 'rgb(0, 102, 153)'
+                    }
+                },
+                /*axisLabel : {
+                    textStyle : {
+                        align : 'right'
+                    }
+                },*/
+                splitLine : {
+                    show : false
+                },
+                data : ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
+            },
+            yAxis : {
+                show : false,
+                max : 30
+            },
+            series : [
+                {
+                    type : 'bar',
+                    name : '实际销售',
+                    barWidth : 40,
+                    barGap : -50,
+                    barCategoryGap : 80,
+                    itemStyle : {
+                        normal : {
+                            color : 'rgba(0, 153, 51, .8)',
+                            barBorderRadius : [10, 10, 1000, 1000],
+                            label : {
+                                show: true,
+                                formatter : function(params){return params.value},
+                                position:'top',
+                                textStyle : {
+                                    color : 'rgb(0, 153, 51)',
+                                    // fontWeight : 'bold',
+                                    fontSize : 16
+                                }
+                            }
+                        },
+                        emphasis : {
+                            barBorderRadius : [10, 10, 1000, 1000]
+                        }
+                    },
+                    data : [12, 15, 15, 10, 13, 20, 16]
+                },
+                {
+                    type : 'bar',
+                    name : '预期销售',
+                    barMaxWidth : 60,
+                    itemStyle : {
+                        normal : {
+                            color : 'rgba(0, 102, 153, .4)',
+                            barBorderRadius : [20, 20, 0, 0],
+                            label : {
+                                show : true,
+                                formatter : function(params){return params.value},
+                                position : 'insideTop',
+                                textStyle : {
+                                    color : '#fff',
+                                    fontSize : 16
+                                }
+                            }
+                        },
+                        emphasis : {
+                            barBorderRadius : [20, 20, 0, 0]
+                        }
+                    },
+                    data : [9, 11, 10, 6, 8, 15, 10]
+                }
+            ]
+        };
+
+        myChart.setOption(option);
+    </script>
+</body>
+</html>

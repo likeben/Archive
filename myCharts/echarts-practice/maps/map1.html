@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>地图一</title>
+    <script src="../js/jquery-3.2.0.js"></script>
+    <script src="../js/underscore.js"></script>
+    <script src="../echarts/echarts.js"></script>
+    <script src="map/china.js"></script>
+
+    <script>
+        $(function() {
+            let myChart = echarts.init($('#main')[0]);
+
+            let dataArr = [];
+            for (let i = 0; i < 300; i++) {
+                dataArr.push([(Math.random() * 18 + 100).toFixed(4), (Math.random() * 15 + 25).toFixed(4), _.random(1, 20), _.random(5, 100)])
+            }
+
+            let option = {
+                title : {
+                    text : '基于地图的大规模散点图',
+                    subtext : 'author : likeben',
+                    textStyle : {
+                        color : '#eee'
+                    },
+                    subtextStyle : {
+                        fontStyle : 'italic'
+                    },
+                    left : 'center',
+                    top : 10
+                },
+                legend : {
+                    right : 30,
+                    bottom : 30,
+                    textStyle : {
+                        color : '#f5f5f5'
+                    },
+                    data : ['散点信息']
+                },
+                grid : {
+                    show : true,
+                    left : 0,
+                    top : 0,
+                    height : '100%',
+                    width : '100%',
+                    backgroundColor : '#404A59'
+                },
+                tooltip : {
+                    formatter : (params) => params.seriesName + ' : ' + params.data[2]
+                },
+                geo : {
+                    map : 'china',
+                    roam : true,
+                    top : 80,
+                    scaleLimit : {
+                        min : 0.5,
+                        max : 1.5
+                    },
+                    itemStyle : {
+                        normal : {
+                            color : '#323C48',
+                            borderColor : '#000'
+                        },
+                        emphasis : {
+                            color : '#2A333D'
+                        }
+                    },
+                    label : {
+                        emphasis : {
+                            show : false
+                        }
+                    }
+                },
+                visualMap : {
+                    type : 'piecewise',
+                    color : ['#F63832','#1F8BF4','#FAB000'],
+                    min : 5,
+                    max : 100,
+                    left : 30,
+                    bottom : 20,
+                    textStyle : {
+                        color : '#d8d8d8'
+                    }
+                },
+                series : [
+                    {
+                        name : '散点信息',
+                        type : 'scatter',
+                        coordinateSystem : 'geo',
+                        symbolSize : (params) => params[2],
+                        data : dataArr
+                    }
+                ]
+            };
+
+            myChart.setOption(option);
+        })
+    </script>
+</head>
+<body>
+<div id="main" style="width: 80%;height: 500px;margin: 50px auto;"></div>
+</body>
+</html>

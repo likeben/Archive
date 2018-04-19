@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>konva-饼状图</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body>
+<div id="container"></div>
+
+
+<script src="js/konva.min.js"></script>
+
+<!-- 饼状图库 -->
+<script src='js/pieChart.js'></script>
+
+<script>
+    var stage = new Konva.Stage({
+        container : 'container',
+        width : window.innerWidth,
+        height : window.innerHeight
+    });
+
+    var dataArr = [
+        {name:'北京', color:'yellow', value:0.3},
+        {name:'上海', color:'red', value:0.2},
+        {name:'深圳', color:'purple', value:0.1},
+        {name:'广州', color:'blue', value:0.15},
+        {name:'杭州', color:'green', value:0.25}
+    ];
+
+    var x0 = window.innerWidth * 0.5;
+    var y0 = window.innerHeight * 0.5;
+
+    // 实例化饼图
+    var pieChart = new PieChart({
+        x : x0,
+        y : y0,
+        innerR : 160,
+        outerR : 180,
+        outerSW : 5,
+        outerS : '#aaa',
+        data : dataArr
+    });
+
+    // 绘制饼图
+    pieChart.render(stage);
+
+    // 播放动画
+    pieChart.playAnimation();
+</script>
+</body>
+</html>

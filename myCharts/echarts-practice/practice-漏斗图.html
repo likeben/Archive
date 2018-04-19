@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>echarts-漏斗图</title>
+</head>
+<body>
+<div id="main" style="width: 100%;height: 550px;"></div>
+
+<script src="echart2/echarts-all.js"></script>
+<script>
+    var myChart = echarts.init(document.getElementById('main'));
+    var colorArr = ['#69D68B', '#B4D666', '#FFD640', '#FFB140', '#FF7340'];
+    var option = {
+        color : ['rgba(255,162,128,1)','rgba(255,203,128,1)','rgba(255,228,128,1)','rgba(205,228,153,1)','rgba(155,228,178,1)'],
+        title : {
+            text : '他_牺牲生命, _出卖组织',
+            subtext : '这就叫代沟(纯属虚构)',
+            sublink : 'http://www.baidu.com'
+        },
+        legend : {
+            data : ['自我实现', '尊重', '社交', '安全', '生理', 'Wifi', '手机/iPad']
+        },
+        toolbox : {
+            show : true,
+            feature : {
+                mark : {show:true},
+                dataView : {show:true},
+                restore : {show:true},
+                saveAsImage : {show:true}
+            }
+        },
+        tooltip : {
+            trigger : 'item',
+            formatter : '{a}<br >{b}'
+        },
+        series : [
+            {
+                name : '马斯洛需求层次理论',
+                type : 'funnel',
+                x : 40,
+                height : 275,
+                sort : 'ascending',
+                minSize : '95%',
+                itemStyle : {
+                    normal : {
+                        labelLine : {show : false}
+                    },
+                    emphasis : {
+                        color : function(value) {
+                            console.log(value);
+                            return colorArr[value.series.data.length - value.dataIndex - 1];
+                        },
+                        label : {
+                            position : 'inner',
+                            formatter : function(value) {
+                                // console.log(value);
+                                return value.seriesName + ' ' + value.name;
+                            }
+                        }
+                    }
+                },
+                data : [
+                    {name : '生理', value : 100},
+                    {name : '安全', value : 80},
+                    {name : '社交', value : 60},
+                    {name : '尊重', value : 40},
+                    {name : '自我实现', value : 20}
+                ]
+            },
+            {
+                name : '60后',
+                type : 'funnel',
+                x : '-64%',
+                height : 275,
+                maxSize : '12%',
+                //funnelAlign : 'left',
+                sort : 'none',
+                itemStyle : {
+                    normal : {
+                        color : function(value) {
+                            return colorArr[value.dataIndex];
+                        },
+                        label : {show : false},
+                        labelLine : {show : false},
+                        borderWidth : 2
+                    },
+                    emphasis : {
+                        label : {
+                            position : 'inner',
+                            formatter : '{a} {b} {c}%'
+                        }
+                    }
+                },
+                data : [
+                    {name : '自我实现', value : 5},
+                    {name : '尊重', value : 5},
+                    {name : '社交', value : 5},
+                    {name : '安全', value : 80},
+                    {name : '生理', value : 100, itemStyle : {
+                        normal : {
+                            label : {
+                                show : true,
+                                position : 'inner',
+                                formatter : function(value) {
+                                    return value.seriesName + ' 模型';
+                                }
+                            }
+                        }
+                    }}
+                ]
+            },
+            {
+                name : '70后/80后',
+                type : 'funnel',
+                x : '-16%',
+                height : 275,
+                maxSize : '18%',
+                sort : 'none',
+                itemStyle : {
+                    normal : {
+                        color : function(value) {
+                            return colorArr[value.dataIndex];
+                        },
+                        label : {show : false},
+                        labelLine : {show : false},
+                        borderWidth : 2
+                    },
+                    emphasis : {
+                        label : {
+                            position : 'inner',
+                            formatter : '{a} {b} {c}%'
+                        }
+                    }
+                },
+                data : [
+                    {name : '自我实现', value : 10},
+                    {name : '尊重', value : 20},
+                    {name : '社交', value : 30},
+                    {name : '安全', value : 80},
+                    {name : '生理', value : 100, itemStyle : {
+                        normal : {
+                            label : {
+                                show : true,
+                                position : 'inner',
+                                formatter : function(value) {
+                                    return value.seriesName + ' 模型';
+                                }
+                            }
+                        }
+                    }}
+                ]
+            },
+            {
+                name : '90/00后',
+                type : 'funnel',
+                x : '20%',
+                height : 330,
+                maxSize : '27%',
+                sort : 'none',
+                itemStyle : {
+                    normal : {
+                        color : function(value) {
+                            return colorArr[value.dataIndex];
+                        },
+                        label : {show : false},
+                        labelLine : {show : false},
+                        borderWidth : 2
+                    },
+                    emphasis : {
+                        label : {
+                            position : 'inner',
+                            formatter : '{a} {b} {c}%'
+                        }
+                    }
+                },
+                data : [
+                    {name : '自我实现', value : 50},
+                    {name : '尊重', value : 60},
+                    {name : '社交', value : 40},
+                    {name : '安全', value : 30},
+                    {name : '生理', value : 20},
+                    {name : 'Wifi', value : 100, itemStyle : {
+                        normal : {
+                            color : '#FF6666',
+                            label : {
+                                show : true,
+                                position : 'inner',
+                                formatter : function(value) {
+                                    return value.seriesName + ' 模型';
+                                }
+                            }
+                        },
+                        emphasis : {
+                            color : '#FF3333'
+                        }
+                    }}
+                ]
+            },
+            {
+                name : '10后',
+                type : 'funnel',
+                x : '62%',
+                height : 330,
+                maxSize : '55%',
+                sort : 'none',
+                itemStyle : {
+                    normal : {
+                        color : function(value) {
+                            return colorArr[value.dataIndex];
+                        },
+                        label : {show : false},
+                        labelLine : {show : false},
+                        borderWidth : 2
+                    },
+                    emphasis : {
+                        label : {
+                            position : 'inner',
+                            formatter : '{a} {b} {c}%'
+                        }
+                    }
+                },
+                data : [
+                    {name : '自我实现', value : 80},
+                    {name : '尊重', value : 5},
+                    {name : '社交', value : 1},
+                    {name : '安全', value : 5},
+                    {name : '生理', value : 50},
+                    {name : '手机/iPad', value : 100, itemStyle : {
+                        normal : {
+                            color : '#FF3333',
+                            label : {
+                                show : true,
+                                position : 'inner',
+                                formatter : function(value) {
+                                    return value.seriesName + ' 模型';
+                                }
+                            }
+                        }
+                    }}
+                ]
+            }
+        ]
+
+    };
+
+
+    myChart.setOption(option);
+</script>
+</body>
+</html>

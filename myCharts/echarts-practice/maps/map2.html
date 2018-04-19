@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>地图二</title>
+    <script src="../js/jquery-3.2.0.js"></script>
+    <script src="../js/underscore.js"></script>
+
+    <!-- 引入百度地图jssdk -->
+    <script src="http://api.map.baidu.com/api?v=2.0&ak=6jVy2SXeGyGzCkRdcVG0xaa8Bqx36Fd1"></script>
+    <!-- 引入echarts -->
+    <script src="../js/echarts.js"></script>
+    <!-- 引入百度地图扩展 -->
+    <script src="../js/bmap-min.js"></script>
+    <script>
+        $(function() {
+            let dataArr = [];
+            for (let i = 0; i < 90; i++) {
+                dataArr.push([(Math.random() * 18 + 100).toFixed(4), (Math.random() * 15 + 25).toFixed(4), _.random(1, 20), _.random(5, 100)])
+            }
+
+            let myChart = echarts.init($('#main')[0]);
+            let option = {
+                // 加载bmap组件
+                bmap : {
+                    center: [113.65,34.76],
+                    // 百度地图初始缩放比例
+                    zoom: 5,
+                    // 是否开启拖拽或缩放
+                    roam : true,
+                    // 百度地图自定义样式
+                    mapStyle : {}
+                },
+                series : {
+                    type : 'scatter',
+                    // 使用百度地图坐标系
+                    coordinateSystem : 'bmap',
+                    symbolSize : function(params) {
+                        return params[2];
+                    },
+                    itemStyle : {
+                        normal : {
+                            color : function(params) {
+                                console.log(params);
+                                return 'rgba(25, 90, 46, '+ (params.data[3] / 100).toFixed(2) +')'
+                            }
+                        }
+                    },
+                    // 数据前两项为经纬度
+                    data : dataArr
+                }
+            };
+
+            myChart.setOption(option);
+
+            // 获取百度地图实例，使用百度地图自带的控件; 必须放到setOption()后面, 否则会报错
+            let bmap = myChart.getModel().getComponent('bmap').getBMap();
+            bmap.addControl(new BMap.MapTypeControl());
+        })
+    </script>
+</head>
+<body>
+<div id="main" style="width: 80%;height: 500px;margin: 50px auto;"></div>
+</body>
+</html>

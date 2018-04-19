@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>echarts-图例</title>
+</head>
+<body>
+<div id="main" style="width: 80%;height: 550px;margin: 50px auto; border: 1px solid #d5d5d5;"></div>
+<script src="echart2/echarts-all.js"></script>
+<script>
+    window.onload = function() {
+        var myChart = echarts.init(document.getElementById('main'));
+        var option = {
+            grid : {
+                x : 15,
+                x2 : 37,
+                y : 100,
+                y2 : 36,
+                borderWidth : 0
+            },
+            title : {
+                // x : 0,   // 为文字的坐标, 非title组件的坐标
+                text : '产品销量',
+                link : 'http://echarts.baidu.com/',
+                padding : [5, 500],
+                textAlign : 'center',
+                backgroundColor : '#EEEEEE'
+            },
+            legend : {
+                y : 55,
+                itemWidth : 25,
+                itemHeight : 20,
+                itemGap : 30,
+                formatter : function(name){
+                    if (name == '产品A') {
+                        return name + '\n60%'
+                    } else if (name == '产品B') {
+                        return name + '\n40%'
+                    } else {
+                        return name + '\n市场占有率'
+                    }
+                },
+                textStyle : {
+                    color : 'auto'
+                },
+                data : [{
+                    name : '产品型号',
+                    icon : 'image://http://echarts.baidu.com/doc/asset/img/echarts-logo.png'
+                }, '产品A', '产品B']
+            },
+            tooltip : {
+                trigger : 'axis'
+            },
+            xAxis : {
+                splitLine : {
+                     show : false
+                },
+                data : ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
+            },
+            yAxis : {
+                position : 'right',
+                axisLine : {
+                    show : false
+                },
+                splitLine : {
+                    lineStyle : {
+                        type : 'dashed'
+                    }
+                }
+            },
+            series : [
+                {
+                    name : '产品A',
+                    type : 'line',
+                    symbol : 'emptyCircle',
+                    symbolSize : 5,
+                    data: [13, 11, 8, 13, 12, 13, 10]
+                },
+                {
+                    name : '产品B',
+                    type : 'line',
+                    symbol : 'emptyCircle',
+                    symbolSize : 5,
+                    data : [3, 5, 3, 5, 2, 3, 6]
+                }
+            ]
+        };
+
+        myChart.setOption(option);
+    }
+</script>
+</body>
+</html>

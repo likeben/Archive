@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>echarts-地图</title>
+    <script src="echart2/echarts-all.js"></script>
+    <script>
+        window.onload = function() {
+            var myChart = echarts.init(document.getElementById('main'));
+            var colorArr = ['#2EC7C9', '#B6A2DE', 'rgba(90,177,239,1)', '#FFB980', '#D87A80', '#8D98B3', '#E5CF0D'];
+            var option = {
+                title : {
+                    text : '2011年 中美日三国电子商务对比(使用频率)',
+                    subtext : 'from ebrun',
+                    sublink : 'http://www.ebrun.com/20121031/59681.shtml',
+                    x : 'center',
+                    y : 10,
+                    textStyle : {
+                        color : '#008ACD',
+                        fontWeight : 'normal'
+                    },
+                    subtextStyle : {
+                        fontFamily : '微软雅黑'
+                    }
+                },
+                legend : {
+                    y : '85%',
+                    data : ['1年1次', '半年1次', '2-3个月1次', '每月1次', '每月2-3次', '每周1-2次', '每周3-5次']
+                },
+                dataRange : {
+                    show : true,
+                    orient : 'horizontal',
+                    x : 'center',
+                    min : 0,
+                    max : 50000,
+                    itemWidth : 40,
+                    splitNumber : 0,
+                    color : ['#FF5200', '#F7FC10', '#88CEF9'],
+                    text : ['50, 000万', '互联网人口']
+                },
+                tooltip : {
+                    trigger : 'item',
+                    backgroundColor : 'rgba(0,0,0,.4)',
+                    formatter : '{a}<br >{b} : {c}%'
+                },
+                series : [
+                    {
+                        name : '美国电子商务使用频率',
+                        type : 'pie',
+                        center : ['16%', '50%'],
+                        radius : [70, 80],
+                        itemStyle : {
+                            normal : {
+                                color : function(value) {
+                                    return colorArr[value.dataIndex];
+                                },
+                                label : {
+                                    formatter : function(params) {
+                                        return params.percent < 20 ? ((params.value).toFixed(2) + '%') : (params.name + '\n' + (params.value).toFixed(2) + '%')
+                                    }
+                                },
+                                labelLine : {
+                                    length : 10
+                                }
+                            }
+                        },
+                        data :[
+                            {name:'1年1次', value:5.1},
+                            {name:'半年1次', value:9.8},
+                            {name:'2-3个月1次', value:20.8},
+                            {name:'每月1次', value:19.6},
+                            {name:'每月2-3次', value:26.9},
+                            {name:'每周1-2次', value:11.2},
+                            {name:'每周3-5次', value:6.6}
+                        ]
+                    },
+                    {
+                        name : 'United States of America',
+                        type : 'map',
+                        mapType : 'world|United States of America',
+                        hoverable : false,
+                        tooltip : {
+                            show : false
+                        },
+                        mapLocation : {
+                            x : '12%',
+                            width : 100
+                        },
+                        nameMap : {'United States of America' : '美国'},
+                        itemStyle : {
+                            normal : {
+                                color : '#FCFE05',
+                                label : {
+                                    show : true,
+                                    formatter : '{a}互联网人口\n24,520 万',
+                                    textStyle : {
+                                        color : '#333',
+                                        fontSize : 14
+                                    }
+                                }
+                            }
+                        },
+                        data : {name : 'United States of America', value : 24520}
+                    },
+                    {
+                        name : '中国电子商务使用频率',
+                        type : 'pie',
+                        radius : [70, 80],
+                        itemStyle : {
+                            normal : {
+                                color : function(value) {
+                                    return colorArr[value.dataIndex];
+                                },
+                                label : {
+                                    formatter : function(params) {
+                                        return params.percent < 20 ? ((params.value).toFixed(2) + '%') : (params.name + '\n' + (params.value).toFixed(2) + '%')
+                                    }
+                                },
+                                labelLine : {
+                                    length : 10
+                                }
+                            }
+                        },
+                        data :[
+                            {name:'1年1次', value:0.7},
+                            {name:'半年1次', value:3.9},
+                            {name:'2-3个月1次', value:9.8},
+                            {name:'每月1次', value:14},
+                            {name:'每月2-3次', value:29.6},
+                            {name:'每周1-2次', value:30.7},
+                            {name:'每周3-5次', value:11.4}
+                        ]
+                    },
+                    {
+                        name : 'China',
+                        type : 'map',
+                        mapType : 'world|China',
+                        hoverable : false,
+                        tooltip : {
+                            show : false
+                        },
+                        mapLocation : {
+                            width : 100
+                        },
+                        nameMap : {'China' : '中国'},
+                        itemStyle : {
+                            normal : {
+                                color : '#f00',
+                                label : {
+                                    show : true,
+                                    formatter : '{a}互联网人口\n51,310 万',
+                                    textStyle : {
+                                        color : '#333',
+                                        fontSize : 14
+                                    }
+                                }
+                            }
+                        },
+                        data : {name : 'China', value : 51310}
+                    },
+                    {
+                        name : '日本电子商务使用频率',
+                        type : 'pie',
+                        center : ['84%', '50%'],
+                        radius : [70, 80],
+                        itemStyle : {
+                            normal : {
+                                color : function(value) {
+                                    return colorArr[value.dataIndex];
+                                },
+                                label : {
+                                    formatter : function(params) {
+                                        return params.percent < 20 ? ((params.value).toFixed(2) + '%') : (params.name + '\n' + (params.value).toFixed(2) + '%')
+                                    }
+                                },
+                                labelLine : {
+                                    length : 10
+                                }
+                            }
+                        },
+                        data :[
+                            {name:'1年1次', value:6},
+                            {name:'半年1次', value:9.9},
+                            {name:'2-3个月1次', value:23.3},
+                            {name:'每月1次', value:27.9},
+                            {name:'每月2-3次', value:25.6},
+                            {name:'每周1-2次', value:6.4},
+                            {name:'每周3-5次', value:1}
+                        ]
+                    },
+                    {
+                        name : 'Japan',
+                        type : 'map',
+                        mapType : 'world|Japan',
+                        hoverable : false,
+                        tooltip : {
+                            show : false
+                        },
+                        mapLocation : {
+                            x : '82%',
+                            width : 60
+                        },
+                        nameMap : {'Japan' : '日本'},
+                        itemStyle : {
+                            normal : {
+                                color : '#B3E09C',
+                                label : {
+                                    show : true,
+                                    formatter : '{a}互联网人口\n9,610 万',
+                                    textStyle : {
+                                        color : '#333',
+                                        fontSize : 14
+                                    }
+                                }
+                            }
+                        },
+                        data : {name : 'Japan', value : 9610}
+                    }
+                ]
+            };
+
+            myChart.setOption(option);
+        }
+    </script>
+</head>
+<body>
+    <div id="main" style="width: 80%;height: 400px;border: 1px solid #ddd;margin: 0 auto;"></div>
+</body>
+</html>

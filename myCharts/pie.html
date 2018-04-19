@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>饼状图</title>
+</head>
+<body>
+<div style="width: 800px; margin: 50px auto">
+    <canvas id="theCanvas" width="600" height="450" style="border: 1px solid #ccc;"></canvas>
+</div>
+
+<script>
+    var theCanvas = document.getElementById('theCanvas');
+    var ctx = theCanvas.getContext('2d');
+
+    // 自定义数据
+    var data = [{"name":"北京","color":"red","value":0.3},{"name":"上海","color":"yellow","value":0.15},{"name":"广州","color":"blue","value":0.1},{"name":"深圳","color":"green","value":0.2},{"name":"杭州","color":"purple","value":0.25}];
+    
+    var pi = Math.PI;
+    var startAngle = -0.5 * pi;
+    var endAngle = 0;
+    var textAngle = 0;
+
+    // 绘制饼状图
+    for (var i = 0; i < data.length; i++) {
+        // 绘制饼形
+        endAngle = startAngle + data[i]['value'] * 2 * pi;
+        ctx.beginPath();
+        ctx.moveTo(300, 200);
+        ctx.fillStyle = data[i]['color'];
+        ctx.arc(300, 200, 120, startAngle, endAngle);
+        ctx.fill();
+
+        // 绘制文字
+        textAngle = startAngle + data[i]['value'] * 2 * pi * 0.5;
+        x = Math.cos(textAngle) * (120 + 30) + 300;
+        y = Math.sin(textAngle) * (120 + 30) + 200;
+        ctx.font = '20px "微软雅黑"';
+
+        if (textAngle > 0.5 * Math.PI && textAngle < 1.5 * Math.PI) {
+            ctx.textAlign = 'end';
+        }
+
+        ctx.fillText(data[i]['name'] + ' ' + data[i]['value'] * 100 + '%', x, y);
+
+        // 更新起始角度
+        startAngle = endAngle;
+    }
+
+    
+</script>
+</body>
+</html>
